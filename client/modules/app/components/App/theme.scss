@@ -1,13 +1,3 @@
-@import '~styles/globals';
-@import 'config';
-
 .app {
   text-align: center;
-}
-
-.header {
-  background-color: $header-background-color;
-  color: $header-color;
-  height: 8 * $unit;
-  padding: 2 * $unit;
 }

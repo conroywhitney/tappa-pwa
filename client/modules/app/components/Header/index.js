@@ -1,7 +1,7 @@
 import React from 'react'
 import { themr } from 'react-css-themr'
 
-import appTheme from '../App/theme.scss'
+import headerTheme from './theme.scss'
 
 export function Header({ theme }) {
   return (
@@ -11,4 +11,4 @@ export function Header({ theme }) {
   )
 }
 
-export default themr('', appTheme)(Header)
+export default themr('', headerTheme)(Header)
