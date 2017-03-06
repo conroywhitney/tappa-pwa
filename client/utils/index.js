@@ -1,0 +1,3 @@
+export {
+  getRandomInt
+} from './math'

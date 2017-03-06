@@ -3,6 +3,9 @@
     "zeal",
     "zeal/react"
   ],
+  "env": {
+    "jest": true
+  },
   "root": true,
   "settings": {
     "import/resolver": {
