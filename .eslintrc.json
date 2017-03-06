@@ -1,0 +1,18 @@
+{
+  "extends": [
+    "zeal",
+    "zeal/react"
+  ],
+  "root": true,
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": {
+          "resolve": {
+            "root": "./client"
+          }
+        }
+      }
+    }
+  }
+}
