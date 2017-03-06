@@ -4,12 +4,12 @@ import { themr } from 'react-css-themr'
 
 import appTheme from './theme.scss'
 
+import Header from '../Header'
+
 export function App({ theme }) {
   return (
     <div className={theme.app}>
-      <div className={theme.header}>
-        <h4>Tappa&sup3;</h4>
-      </div>
+      <Header />
 
       <Switch>
         <Route exact path='/' component={Home} />
