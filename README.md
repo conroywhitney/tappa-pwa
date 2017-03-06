@@ -1,6 +1,6 @@
-# Tappa (PWA)
+# Tappa&sup3; (PWA)
 
-Progressive Web App (PWA) for Tappa HTML5 Mobile Game
+Progressive Web App (PWA) for Tappa&sup3; HTML5 Mobile Game
 
 
 ## Development

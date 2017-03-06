@@ -8,10 +8,6 @@
 .header {
   background-color: $header-background-color;
   color: $header-color;
-  height: 15 * $unit;
-  padding: 2 * $unit;
-}
-
-.logo {
   height: 8 * $unit;
+  padding: 2 * $unit;
 }

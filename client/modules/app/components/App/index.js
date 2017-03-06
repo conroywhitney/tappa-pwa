@@ -3,14 +3,12 @@ import { Switch, Route } from 'react-router-dom'
 import { themr } from 'react-css-themr'
 
 import appTheme from './theme.scss'
-import logo from './logo.png'
 
 export function App({ theme }) {
   return (
     <div className={theme.app}>
       <div className={theme.header}>
-        <img src={logo} className={theme.logo} alt='logo' />
-        <h4>Welcome!</h4>
+        <h4>Tappa&sup3;</h4>
       </div>
 
       <Switch>
