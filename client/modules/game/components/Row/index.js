@@ -15,7 +15,9 @@ export default function Row({ board, row, onClick }) {
     const index = (row * SIZE) + column
     const player = board[index]
 
-    tiles.push(<Tile player={player} onClick={() => onClick(index)} />)
+    tiles.push(
+      <Tile player={player} key={index} onClick={() => onClick(index)} />
+    )
   }
 
   return (

@@ -11,7 +11,9 @@ export default function Board({ board, onClick }) {
   const rows = []
 
   for (let row = 0; row < SIZE; row += 1) {
-    rows.push(<Row board={board} onClick={onClick} row={row} />)
+    rows.push(
+      <Row board={board} key={row} row={row} onClick={onClick} />
+    )
   }
 
   return (
