@@ -84,8 +84,6 @@ const tick = (gameState: Object, _payload: Object) =>
     countdown: newCountdown({ countdown: gameState.countdown })
   })
 
-const multiplayerConnect = (gameState: Object) => gameState
-
 const remoteAction = (gameState, action, payload) => {
   // eslint-disable-next-line no-console
   console.log(
@@ -104,7 +102,6 @@ const sendRemoteTap = (gameState: Object, { payload: { index } }) =>
   remoteAction(gameState, ActionTypes.TAP, { index })
 
 export default createReducer(INITIAL_STATE, {
-  [ActionTypes.MULTIPLAYER_CONNECT]: multiplayerConnect,
   [ActionTypes.PLAY_OPPONENT]: playOpponent,
   [ActionTypes.PLAY_PLAYER]: playPlayer,
   [ActionTypes.RESET]: reset,
