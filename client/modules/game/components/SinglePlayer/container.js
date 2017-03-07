@@ -11,7 +11,7 @@ const mapStateToProps = state =>
 
 const mapDispatchToProps = dispatch => ({
   handleTap: index => dispatch(GameActions.tap(index)),
-  resetGame: () => dispatch(GameActions.reset())
+  resetGame: () => dispatch(GameActions.reset)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game)

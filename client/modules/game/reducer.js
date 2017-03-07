@@ -10,10 +10,19 @@ import {
   times,
   update
 } from 'ramda'
-import { createActions, createReducer } from 'reduxsauce'
-import { COUNTDOWN, PLAYERS, QTY, STATUS } from '../../../constants'
+import { createReducer } from 'zeal-redux-utils'
 
-/* ------------- Helpers ------------------- */
+import ActionTypes from './action_types'
+import { COUNTDOWN, PLAYERS, QTY, STATUS } from '../../constants'
+
+export const INITIAL_STATE = {
+  board: times(always(PLAYERS.blank), QTY),
+  countdown: 30,
+  lives: 3,
+  opponent: null,
+  status: STATUS.inProgress
+}
+
 const reverseMerge = flip(merge)
 
 const playerWon = all(equals(PLAYERS.me))
@@ -54,28 +63,6 @@ const updateBoard = (gameState: Object, { index }, player: Number) =>
     board: newBoard({ index, player, board: gameState.board })
   })
 
-/* ------------- Types and Action Creators ------------- */
-
-const { Types, Creators } = createActions({
-  tap: ['index'],
-  tick: [],
-  playPlayer: ['index'],
-  playOpponent: ['index'],
-  reset: null
-})
-
-/* ------------- Initial State ------------- */
-
-export const INITIAL_STATE = {
-  board: times(always(PLAYERS.blank), QTY),
-  countdown: 30,
-  lives: 3,
-  opponent: null,
-  status: STATUS.inProgress
-}
-
-/* ------------- Reducers ------------- */
-
 const playPlayer = (gameState: Object, payload: Object) =>
   updateBoard(gameState, payload, PLAYERS.me)
 
@@ -84,7 +71,7 @@ const playOpponent = (gameState: Object, payload: Object) =>
 
 const reset = (_gameState: Object) => INITIAL_STATE
 
-const tap = (gameState: Object, { index }) =>
+const tap = (gameState: Object, { payload: { index } }) =>
   updateGameState(
     playPlayer(gameState, { index }),
     {
@@ -97,22 +84,10 @@ const tick = (gameState: Object, _payload: Object) =>
     countdown: newCountdown({ countdown: gameState.countdown })
   })
 
-/* ------------- Selectors ------------- */
-
-/* ------------- Hookup Reducers To Types ------------- */
-
-const reducer = createReducer(INITIAL_STATE, {
-  [Types.PLAY_PLAYER]: playPlayer,
-  [Types.PLAY_OPPONENT]: playOpponent,
-  [Types.RESET]: reset,
-  [Types.TAP]: tap,
-  [Types.TICK]: tick
+export default createReducer(INITIAL_STATE, {
+  [ActionTypes.PLAY_PLAYER]: playPlayer,
+  [ActionTypes.PLAY_OPPONENT]: playOpponent,
+  [ActionTypes.RESET]: reset,
+  [ActionTypes.TAP]: tap,
+  [ActionTypes.TICK]: tick
 })
-
-/* ------------- Exports ------------- */
-
-export {
-  Creators as GameActions,
-  reducer as GameReducer,
-  Types as GameTypes
-}
