@@ -1,4 +1,4 @@
-import { takeEvery } from 'redux-saga'
+import { takeEvery } from 'redux-saga/effects'
 
 import { GameSagas } from '../modules/game'
 
