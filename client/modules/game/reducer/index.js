@@ -13,7 +13,7 @@ import {
 import { createReducer } from 'zeal-redux-utils'
 
 import ActionTypes from './action_types'
-import { COUNTDOWN, PLAYERS, QTY, STATUS } from '../../constants'
+import { COUNTDOWN, PLAYERS, QTY, STATUS } from '../../../constants'
 
 export const INITIAL_STATE = {
   board: times(always(PLAYERS.blank), QTY),
