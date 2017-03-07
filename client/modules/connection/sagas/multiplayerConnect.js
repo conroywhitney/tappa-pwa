@@ -26,31 +26,16 @@ const connectIoT = credentials => {
   IoT.connect({ credentials, topic, handlers })
 }
 
-/* eslint-disable no-console */
-/* eslint-disable max-len */
+const sendMessage = message => IoT.send(message)
+
 export function* multiplayerConnect() {
-  console.log('MultiplayerSagas', 'multiplayerConnect')
-
   const iotKeysEndpoint = yield select(awsKeysEndpoint)
+  const iotCredentials =
+    yield call(partial(fetchIoTCredentials, [iotKeysEndpoint]))
 
-  console.log('MultiplayerSagas', 'multiplayerConnect', 'iotKeysEndpoint', iotKeysEndpoint)
-
-  const iotCredentials = yield call(partial(fetchIoTCredentials, [iotKeysEndpoint]))
-
-  console.log('MultiplayerSagas', 'multiplayerConnect', 'iotCredentials', iotCredentials)
-
-  yield call(connectIoT(iotCredentials))
-
-  console.log('MultiplayerSagas', 'multiplayerConnect', 'connected')
-
-  IoT.send('Hello, world!')
-
-  console.log('MultiplayerSagas', 'multiplayerConnect', 'message sent')
-
-  console.log('MultiplayerSagas', 'multiplayerConnect', 'complete')
+  yield call(partial(connectIoT, [iotCredentials]))
+  yield call(partial(sendMessage, ['Hello, world!']))
 }
-/* eslint-enable no-console */
-/* eslint-enable max-len */
 
 export default {
   action: ActionTypes.MULTIPLAYER_CONNECT,
