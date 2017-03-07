@@ -2,3 +2,14 @@
 
 // Reference react-toolbox colors here https://github.com/react-toolbox/react-toolbox/blob/dev/components/_colors.scss.
 // Define colors with HEX values here - example:
+
+$body-background-color: $color-white !default;
+$header-background-color: $palette-indigo-700 !default;
+$header-color: $color-white !default;
+
+$tile-neutral-background: $color-white !default;
+$tile-opponent-background: $palette-grey-800 !default;
+$tile-player-background: $palette-pink-a200 !default;
+
+$underline-bright: $palette-pink-a200 !default;
+$underline-dark: $palette-grey-800 !default;

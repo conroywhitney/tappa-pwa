@@ -1,0 +1,17 @@
+@import '~styles/globals';
+
+$board-padding: 3 * $unit;
+$cell-size: 10 * $unit;
+$game-background: $color-white !default;
+$num-cells: 4;
+
+.container {
+  align-items: center;
+  background: $game-background;
+  display: flex;
+  flex-direction: column;
+  height: 90vw;
+  justify-content: center;
+  margin: 3 * $unit auto;
+  width: 90vw;
+}
