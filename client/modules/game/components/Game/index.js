@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-import SinglePlayer from '../SinglePlayer'
+import SinglePlayer from '../SinglePlayer/container'
 
 export default function Game() {
   return (

@@ -24,6 +24,8 @@ export const WIDTH = 800
 
 export const SIZE = 4
 
+export const NUM_TILES = SIZE ** 2
+
 export const QTY = SIZE * SIZE
 
 export const CELL_PERCENT = 1 / SIZE

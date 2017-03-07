@@ -1,0 +1,23 @@
+@import '~styles/globals';
+
+.tile {
+  align-items: 'center';
+  background: 'red';
+  border: 1px solid #000;
+  border-radius: .5 * $unit;
+  display: flex;
+  flex: 0 0 23%;
+  height: 23%;
+  justify-content: 'center';
+  margin: 1%;
+  position: 'absolute';
+  width: 23%;
+}
+
+.me {
+  background: #0f0;
+}
+
+.opponent {
+  background: #f0f;
+}
