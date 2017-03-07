@@ -16,6 +16,6 @@ export default function Tile({ player, onClick }) {
   const tileStyle = classnames(styles.tile, tileColor)
 
   return (
-    <div className={tileStyle} onClick={onClick} />
+    <div className={tileStyle} onTouchStart={onClick} />
   )
 }
