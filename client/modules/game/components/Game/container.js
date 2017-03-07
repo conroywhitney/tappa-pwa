@@ -9,7 +9,7 @@ import { MODES } from '../../../../constants'
 
 const mapStateToProps = state => ({
   ...pick(['board', 'countdown', 'lives', 'status'], state.game),
-  mode: MODES.singlePlayer
+  mode: MODES.multiplayer
 })
 
 const mapDispatchToProps = dispatch => ({
