@@ -33,6 +33,7 @@ const dialogClass = {
 
 function GameOverAlert({ status, theme, onPress }) {
   const closeDialog = onPress
+  const doNothing = () => null
   const actions = [{ label: 'Play Again', onClick: closeDialog }]
   const Dialog = dialogs[status]
   const classes = classnames(theme.dialog, dialogClass[status])
@@ -46,8 +47,8 @@ function GameOverAlert({ status, theme, onPress }) {
           active
           className={classes}
           theme={theme}
-          onEscKeyDown={closeDialog}
-          onOverlayClick={closeDialog} />
+          onEscKeyDown={doNothing}
+          onOverlayClick={doNothing} />
     </div>
   )
 }

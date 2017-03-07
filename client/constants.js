@@ -20,6 +20,11 @@ export const COUNTDOWN = {
   max: 10000
 }
 
+export const MODES = {
+  multiplayer: 'multiplayer',
+  singlePlayer: 'singlePlayer'
+}
+
 export const WIDTH = 800
 
 export const SIZE = 4

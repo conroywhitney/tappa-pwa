@@ -3,10 +3,12 @@ import { createActionTypes } from 'zeal-redux-utils'
 export default createActionTypes(
   'tappa',
   [
-    'TAP',
-    'TICK',
-    'PLAY_PLAYER',
+    'MULTIPLAYER_CONNECT',
     'PLAY_OPPONENT',
-    'RESET'
+    'PLAY_PLAYER',
+    'RESET',
+    'SEND_REMOTE_TAP',
+    'TAP',
+    'TICK'
   ]
 )
