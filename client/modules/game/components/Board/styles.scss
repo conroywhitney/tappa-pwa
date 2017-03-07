@@ -6,11 +6,12 @@ $game-background: $color-white !default;
 $num-cells: 4;
 
 .container {
+  align-items: center;
   background: $game-background;
   display: flex;
-  flex-wrap: wrap;
-  height: $num-cells * $cell-size;
-  margin: $board-padding auto;
-  padding: 0 $board-padding;
-  width: $num-cells * $cell-size;
+  flex-direction: column;
+  height: 90vw;
+  justify-content: center;
+  margin: 3 * $unit auto;
+  width: 90vw;
 }

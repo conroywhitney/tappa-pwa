@@ -7,11 +7,11 @@ import { PLAYERS } from '../../../../constants'
 
 import styles from './styles.scss'
 
-export default function Tile({ playerId, _position, onClick }) {
+export default function Tile({ player, onClick }) {
   const tileColor = {
     [PLAYERS.opponent]: styles.opponent,
     [PLAYERS.me]: styles.me
-  }[playerId]
+  }[player]
 
   const tileStyle = classnames(styles.tile, tileColor)
 

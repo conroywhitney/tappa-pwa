@@ -2,33 +2,21 @@
 
 import React from 'react'
 
-import { NUM_TILES } from '../../../../constants'
-import Tile from '../Tile'
+import { SIZE } from '../../../../constants'
+import Row from '../Row'
 
 import styles from './styles.scss'
 
-function renderTiles({ board, onClick }) {
-  const result = []
+export default function Board({ board, onClick }) {
+  const rows = []
 
-  for (let index = 0; index < NUM_TILES; index += 1) {
-    const playerId = board[index]
-
-    // eslint-disable-next-line no-loop-func
-    result.push(
-      <Tile
-          key={index}
-          playerId={playerId}
-          onClick={() => onClick(index)} />
-    )
+  for (let row = 0; row < SIZE; row += 1) {
+    rows.push(<Row board={board} onClick={onClick} row={row} />)
   }
 
-  return result
-}
-
-export default function Board(props) {
   return (
     <div className={styles.container}>
-      {renderTiles(props)}
+      {rows}
     </div>
   )
 }
