@@ -2,6 +2,7 @@
 
 .tile {
   align-items: center;
+  background: $tile-neutral-background;
   border: 1px solid #000;
   border-radius: .5 * $unit;
   display: flex;
@@ -12,9 +13,9 @@
 }
 
 .me {
-  background: #0f0;
+  background: $tile-player-background;
 }
 
 .opponent {
-  background: #f0f;
+  background: $tile-opponent-background;
 }
