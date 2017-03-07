@@ -1,13 +1,25 @@
 import { applyMiddleware, createStore } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly'
+import createSagaMiddleware from 'redux-saga'
 
 import apolloClient from './apolloClient'
 import reducer from './reducer'
+import sagas from './sagas'
 
 export default function configureStore() {
-  const store = createStore(reducer, composeWithDevTools(
-    applyMiddleware(apolloClient.middleware())
-  ))
+  const sagaMiddleware = createSagaMiddleware()
+
+  const store = createStore(
+    reducer,
+    composeWithDevTools(
+      applyMiddleware(...[
+        apolloClient.middleware(),
+        sagaMiddleware
+      ])
+    )
+  )
+
+  sagaMiddleware.run(sagas)
 
   if (module.hot) {
     module.hot.accept('./reducer', () => {

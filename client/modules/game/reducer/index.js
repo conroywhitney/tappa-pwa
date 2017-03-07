@@ -58,22 +58,22 @@ const updateGameState = (gameState, properties) => {
   return compose(updateStatus, reverseMerge(properties))(gameState)
 }
 
-const updateBoard = (gameState: Object, { index }, player: Number) =>
+const updateBoard = (gameState: Object, index, player: Number) =>
   updateGameState(gameState, {
     board: newBoard({ index, player, board: gameState.board })
   })
 
-const playPlayer = (gameState: Object, payload: Object) =>
-  updateBoard(gameState, payload, PLAYERS.me)
+const playPlayer = (gameState: Object, { payload: { index } }) =>
+  updateBoard(gameState, index, PLAYERS.me)
 
-const playOpponent = (gameState: Object, payload: Object) =>
-  updateBoard(gameState, payload, PLAYERS.opponent)
+const playOpponent = (gameState: Object, { payload: { index } }) =>
+  updateBoard(gameState, index, PLAYERS.opponent)
 
 const reset = (_gameState: Object) => INITIAL_STATE
 
 const tap = (gameState: Object, { payload: { index } }) =>
   updateGameState(
-    playPlayer(gameState, { index }),
+    playPlayer(gameState, { payload: { index } }),
     {
       lives: newLives({ index, board: gameState.board, lives: gameState.lives })
     }
