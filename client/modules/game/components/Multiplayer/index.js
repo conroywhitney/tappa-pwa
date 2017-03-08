@@ -8,15 +8,15 @@ import WaitingAlert from '../WaitingAlert'
 
 export default class Multiplayer extends Component {
   componentWillMount() {
-    const { multiplayerConnect, opponent } = this.props
+    const { multiplayerConnect, connected } = this.props
 
-    if (!opponent) multiplayerConnect()
+    if (!connected) multiplayerConnect()
   }
 
   render() {
     const {
       board,
-      opponent,
+      connected,
       status,
       handleTap,
       resetGame,
@@ -26,7 +26,7 @@ export default class Multiplayer extends Component {
     return (
       <div>
         <GameOverAlert status={status} onPress={resetGame} />
-        <WaitingAlert opponent={opponent} startGame={startGame} />
+        <WaitingAlert connected={connected} startGame={startGame} />
         <Board board={board} onClick={handleTap} />
       </div>
     )

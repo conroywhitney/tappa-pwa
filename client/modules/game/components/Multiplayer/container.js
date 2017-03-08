@@ -1,13 +1,16 @@
 // @flow
 
 import { connect } from 'react-redux'
-import { pick } from 'ramda'
 
 import Multiplayer from './index'
 import { GameActions } from '../../'
 import { IoTActions } from '../../../iot'
 
-const mapStateToProps = state => pick(['opponent'], state.game)
+import { SERVER_STATUS } from '../../../../constants'
+
+const mapStateToProps = state => ({
+  connected: state.iot.status === SERVER_STATUS.connected
+})
 
 const mapDispatchToProps = dispatch => ({
   multiplayerConnect: () => dispatch(IoTActions.iotConnect()),

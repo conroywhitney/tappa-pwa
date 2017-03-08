@@ -6,8 +6,8 @@ import { themr } from 'react-css-themr'
 
 import dialogTheme from './theme.scss'
 
-function WaitingAlert({ opponent, theme, startGame }) {
-  if (opponent) return null
+function WaitingAlert({ connected, theme, startGame }) {
+  if (connected) return null
 
   const closeDialog = () => null
   const actions = [{ label: 'Cancel', onClick: startGame }]
