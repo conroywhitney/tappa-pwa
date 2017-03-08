@@ -1,22 +1,16 @@
 import { partial } from 'ramda'
 import { takeEvery, takeLatest } from 'redux-saga/effects'
 
-import { ConnectionSagas } from '../modules/connection'
+import { IoTSagas } from '../modules/iot'
 import { GameSagas } from '../modules/game'
 
 export default function* root(dispatch) {
   yield [
-    takeEvery(
-      GameSagas.tap.action,
-      GameSagas.tap.handler
-    ),
+    takeEvery(GameSagas.tap.action, GameSagas.tap.handler),
     takeLatest(
-      ConnectionSagas.multiplayerConnect.action,
-      partial(ConnectionSagas.multiplayerConnect.handler, [dispatch])
+      IoTSagas.iotConnect.action,
+      partial(IoTSagas.iotConnect.handler, [dispatch])
     ),
-    takeEvery(
-      ConnectionSagas.sendRemoteTap.action,
-      ConnectionSagas.sendRemoteTap.handler
-    )
+    takeEvery(IoTSagas.iotSend.action, IoTSagas.iotSend.handler)
   ]
 }

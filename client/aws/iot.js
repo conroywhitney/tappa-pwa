@@ -1,5 +1,8 @@
 import awsIot from 'aws-iot-device-sdk'
 
+// eslint-disable-next-line no-console
+const logger = (...message) => console.log('AWS IoT', ...message)
+
 const IoT = {
   client: null,
   iotTopic: null,
@@ -16,36 +19,31 @@ const IoT = {
     IoT.iotTopic = topic
 
     IoT.client = awsIot.device({
-      region,
-      protocol: 'wss',
       accessKeyId: awsAccessKey,
-      secretKey: awsSecretAccessKey,
-      sessionToken,
-      port: 443,
       host: iotEndpoint,
-      baseReconnectTimeMs: 20000,
-      maximumReconnectTimeMs: 20000,
-      minimumConnectionTimeMs: 20000,
-      drainTimeMs: 10000,
-      autoResubscribe: true
+      port: 443,
+      protocol: 'wss',
+      region,
+      secretKey: awsSecretAccessKey,
+      sessionToken
     })
 
     const handleClose = () => {
-      console.log('aws iot', 'handleClose')
+      logger('handleClose')
 
       onClose()
     }
 
     const handleConnect = () => {
-      console.log('aws iot', 'handleConnect')
+      logger('handleConnect')
 
       IoT.client.subscribe(IoT.iotTopic)
       onConnect()
     }
 
     const handleMessage = (listenedTopic, message) => {
-      console.log(
-        'aws iot', 'handleMessage',
+      logger(
+        'handleMessage',
         'listenedTopic', listenedTopic,
         'message', message
       )
@@ -59,13 +57,13 @@ const IoT = {
   },
 
   send: message => {
-    console.log(
-      'aws iot', 'send',
+    logger(
+      'send',
       'iotTopic', IoT.iotTopic,
       'message', message
     )
 
-    console.log(IoT.client)
+    logger(IoT.client)
 
     IoT.client.publish(IoT.iotTopic, message)
   }

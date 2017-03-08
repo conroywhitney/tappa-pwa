@@ -5,16 +5,18 @@ import { pick } from 'ramda'
 
 import Multiplayer from './index'
 import { GameActions } from '../../'
-import { ConnectionActions } from '../../../connection'
+import { IoTActions } from '../../../iot'
 
 const mapStateToProps = state => pick(['opponent'], state.game)
 
 const mapDispatchToProps = dispatch => ({
-  multiplayerConnect: () => dispatch(ConnectionActions.multiplayerConnect()),
-  startGame: () => dispatch(ConnectionActions.sendRemoteTap(1)),
+  multiplayerConnect: () => dispatch(IoTActions.iotConnect()),
+  startGame: () => dispatch(IoTActions.iotSend(GameActions.tap(123))),
   handleTap: index => {
-    dispatch(GameActions.tap(index))
-    dispatch(ConnectionActions.sendRemoteTap(index))
+    const tapAction = GameActions.tap(index)
+
+    dispatch(tapAction)
+    dispatch(IoTActions.iotSend(tapAction))
   }
 })
 
