@@ -11,6 +11,7 @@ export default function* root(dispatch) {
       IoTSagas.iotConnect.action,
       partial(IoTSagas.iotConnect.handler, [dispatch])
     ),
+    takeEvery(IoTSagas.iotReceived.action, IoTSagas.iotReceived.handler),
     takeEvery(IoTSagas.iotSend.action, IoTSagas.iotSend.handler)
   ]
 }
