@@ -34,10 +34,11 @@ const iotConnected = (iotState: Object) => {
   })(iotState)
 }
 
-const iotReceived = (iotState: Object, payload: Object) => {
+const iotReceived = (iotState: Object, action: Object) => {
+  const { payload } = action
   const { message } = payload
 
-  logger('iotReceived', 'message', message)
+  logger('iotReceived', 'message', message.toString())
 
   return iotState
 }
