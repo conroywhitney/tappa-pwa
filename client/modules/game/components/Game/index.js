@@ -10,8 +10,12 @@ import { MODES } from '../../../../constants'
 
 export default function Game(props) {
   const { mode } = props
-  const singlePlayerProps = pick(['board', 'playerId', 'status', 'resetGame'])
-  const multiplayerProps = pick(['board', 'playerId', 'opponent'])
+  const singlePlayerProps = pick([
+    'board', 'playerId', 'status', 'resetGame'
+  ])
+  const multiplayerProps = pick([
+    'board', 'playerId', 'opponent', 'status', 'resetGame'
+  ])
 
   return (
     <div>
