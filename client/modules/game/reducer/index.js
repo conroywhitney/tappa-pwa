@@ -15,13 +15,14 @@ import { createReducer } from 'zeal-redux-utils'
 import uuidV4 from 'uuid/v4'
 
 import ActionTypes from './action_types'
-import { COUNTDOWN, PLAYERS, QTY, STATUS } from '../../../constants'
+import { COUNTDOWN, MODES, PLAYERS, QTY, STATUS } from '../../../constants'
 
 export const INITIAL_STATE = {
   playerId: uuidV4(),
   board: times(always(PLAYERS.blank), QTY),
   countdown: 30,
   lives: 3,
+  mode: MODES.multiplayer,
   opponent: null,
   status: STATUS.inProgress
 }
