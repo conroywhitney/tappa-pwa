@@ -12,29 +12,20 @@ const awsKeysEndpoint = state => {
   return `${apiGatewayUrl}/${iotKeysPath}`
 }
 
-const fetchIoTCredentials = keysUrl =>
+const iotCredentials = keysUrl =>
   fetch(keysUrl).then(response => response.json())
 
-const connectIoT = credentials => {
+export function* multiplayerConnect(dispatch) {
+  const iotKeysEndpoint = yield select(awsKeysEndpoint)
+  const credentials = yield call(partial(iotCredentials, [iotKeysEndpoint]))
   const topic = 'games/1234'
   const handlers = {
-    onClose: () => ConnectionActions.onServerClose(),
-    onConnect: () => ConnectionActions.onServerConnect(),
-    onMessage: message => ConnectionActions.onServerMessage(message)
+    onClose: () => dispatch(ConnectionActions.onServerClose()),
+    onConnect: () => dispatch(ConnectionActions.onServerConnect()),
+    onMessage: message => dispatch(ConnectionActions.onServerMessage(message))
   }
 
   IoT.connect({ credentials, topic, handlers })
-}
-
-const sendMessage = message => IoT.send(message)
-
-export function* multiplayerConnect() {
-  const iotKeysEndpoint = yield select(awsKeysEndpoint)
-  const iotCredentials =
-    yield call(partial(fetchIoTCredentials, [iotKeysEndpoint]))
-
-  yield call(partial(connectIoT, [iotCredentials]))
-  yield call(partial(sendMessage, ['Hello, world!']))
 }
 
 export default {

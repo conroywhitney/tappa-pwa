@@ -84,28 +84,10 @@ const tick = (gameState: Object, _payload: Object) =>
     countdown: newCountdown({ countdown: gameState.countdown })
   })
 
-const remoteAction = (gameState, action, payload) => {
-  // eslint-disable-next-line no-console
-  console.log(
-    'MultiplayerRedux',
-    'remoteAction',
-    'action',
-    action,
-    'payload',
-    payload
-  )
-
-  return gameState
-}
-
-const sendRemoteTap = (gameState: Object, { payload: { index } }) =>
-  remoteAction(gameState, ActionTypes.TAP, { index })
-
 export default createReducer(INITIAL_STATE, {
   [ActionTypes.PLAY_OPPONENT]: playOpponent,
   [ActionTypes.PLAY_PLAYER]: playPlayer,
   [ActionTypes.RESET]: reset,
-  [ActionTypes.SEND_REMOTE_TAP]: sendRemoteTap,
   [ActionTypes.TAP]: tap,
   [ActionTypes.TICK]: tick
 })

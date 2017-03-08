@@ -16,9 +16,14 @@ const onServerMessage = message => (
   { type: ActionTypes.CONNECTION_ON_SERVER_MESSAGE, payload: { message } }
 )
 
+const sendRemoteTap = index => (
+  { type: ActionTypes.SEND_REMOTE_TAP, payload: { index } }
+)
+
 export default {
   multiplayerConnect,
   onServerClose,
   onServerConnect,
-  onServerMessage
+  onServerMessage,
+  sendRemoteTap
 }

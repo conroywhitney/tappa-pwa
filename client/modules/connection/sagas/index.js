@@ -1,5 +1,7 @@
-import MutiplayerConnect from './multiplayerConnect'
+import MultiplayerConnectSaga from './multiplayerConnect'
+import SendRemoteTapSaga from './sendRemoteTap'
 
 export default {
-  multiplayerConnect: MutiplayerConnect
+  multiplayerConnect: MultiplayerConnectSaga,
+  sendRemoteTap: SendRemoteTapSaga
 }

@@ -20,15 +20,10 @@ const reset = () => (
   { type: ActionTypes.RESET }
 )
 
-const sendRemoteTap = index => (
-  { type: ActionTypes.SEND_REMOTE_TAP, payload: { index } }
-)
-
 export default {
   tap,
   tick,
   playPlayer,
   playOpponent,
-  reset,
-  sendRemoteTap
+  reset
 }

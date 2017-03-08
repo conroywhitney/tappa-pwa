@@ -1,9 +1,10 @@
+import { partial } from 'ramda'
 import { takeEvery, takeLatest } from 'redux-saga/effects'
 
 import { ConnectionSagas } from '../modules/connection'
 import { GameSagas } from '../modules/game'
 
-export default function* root() {
+export default function* root(dispatch) {
   yield [
     takeEvery(
       GameSagas.tap.action,
@@ -11,7 +12,11 @@ export default function* root() {
     ),
     takeLatest(
       ConnectionSagas.multiplayerConnect.action,
-      ConnectionSagas.multiplayerConnect.handler
+      partial(ConnectionSagas.multiplayerConnect.handler, [dispatch])
+    ),
+    takeEvery(
+      ConnectionSagas.sendRemoteTap.action,
+      ConnectionSagas.sendRemoteTap.handler
     )
   ]
 }

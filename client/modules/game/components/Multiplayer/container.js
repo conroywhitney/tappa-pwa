@@ -11,9 +11,10 @@ const mapStateToProps = state => pick(['opponent'], state.game)
 
 const mapDispatchToProps = dispatch => ({
   multiplayerConnect: () => dispatch(ConnectionActions.multiplayerConnect()),
+  startGame: () => dispatch(ConnectionActions.sendRemoteTap(1)),
   handleTap: index => {
     dispatch(GameActions.tap(index))
-    dispatch(GameActions.sendRemoteTap(index))
+    dispatch(ConnectionActions.sendRemoteTap(index))
   }
 })
 

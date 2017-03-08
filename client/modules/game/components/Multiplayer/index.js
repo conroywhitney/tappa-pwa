@@ -14,12 +14,19 @@ export default class Multiplayer extends Component {
   }
 
   render() {
-    const { board, opponent, status, handleTap, resetGame } = this.props
+    const {
+      board,
+      opponent,
+      status,
+      handleTap,
+      resetGame,
+      startGame
+    } = this.props
 
     return (
       <div>
         <GameOverAlert status={status} onPress={resetGame} />
-        <WaitingAlert opponent={opponent} />
+        <WaitingAlert opponent={opponent} startGame={startGame} />
         <Board board={board} onClick={handleTap} />
       </div>
     )

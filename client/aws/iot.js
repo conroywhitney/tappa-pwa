@@ -1,9 +1,8 @@
 import awsIot from 'aws-iot-device-sdk'
 
-let client = null
-let iotTopic = null
-
 const IoT = {
+  client: null,
+  iotTopic: null,
   connect: ({ credentials, topic, handlers }) => {
     const {
       iotEndpoint,
@@ -14,29 +13,61 @@ const IoT = {
     } = credentials
     const { onClose, onConnect, onMessage } = handlers
 
-    iotTopic = topic
+    IoT.iotTopic = topic
 
-    client = awsIot.device({
+    IoT.client = awsIot.device({
       region,
       protocol: 'wss',
       accessKeyId: awsAccessKey,
       secretKey: awsSecretAccessKey,
       sessionToken,
       port: 443,
-      host: iotEndpoint
+      host: iotEndpoint,
+      baseReconnectTimeMs: 20000,
+      maximumReconnectTimeMs: 20000,
+      minimumConnectionTimeMs: 20000,
+      drainTimeMs: 10000,
+      autoResubscribe: true
     })
 
-    client.on('connect', onConnect)
-    client.on('message', onMessage)
-    client.on('close', onClose)
+    const handleClose = () => {
+      console.log('aws iot', 'handleClose')
 
-    client.on('close', () => onClose())
-    client.on('connect', () => client.subscribe(topic) && onConnect())
-    client.on('message', (listenedTopic, message) => onMessage(message))
+      onClose()
+    }
+
+    const handleConnect = () => {
+      console.log('aws iot', 'handleConnect')
+
+      IoT.client.subscribe(IoT.iotTopic)
+      onConnect()
+    }
+
+    const handleMessage = (listenedTopic, message) => {
+      console.log(
+        'aws iot', 'handleMessage',
+        'listenedTopic', listenedTopic,
+        'message', message
+      )
+
+      onMessage(message)
+    }
+
+    IoT.client.on('connect', handleConnect)
+    IoT.client.on('message', handleMessage)
+    IoT.client.on('close', handleClose)
   },
 
   send: message => {
-    client.publish(iotTopic, message)
+    console.log(
+      'aws iot', 'send',
+      'iotTopic', IoT.iotTopic,
+      'message', message
+    )
+
+    console.log(IoT.client)
+
+    IoT.client.publish(IoT.iotTopic, message)
   }
 }
 

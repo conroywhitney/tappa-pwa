@@ -19,7 +19,7 @@ export default function configureStore() {
     )
   )
 
-  sagaMiddleware.run(sagas)
+  sagaMiddleware.run(sagas, store.dispatch)
 
   if (module.hot) {
     module.hot.accept('./reducer', () => {
