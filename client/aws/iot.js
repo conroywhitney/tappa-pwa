@@ -1,7 +1,7 @@
 import awsIot from 'aws-iot-device-sdk'
 
 // eslint-disable-next-line no-console
-const logger = (...message) => console.log('AWS IoT', ...message)
+const logger = () => null // (...message) => console.log('AWS IoT', ...message)
 
 const IoT = {
   client: null,

@@ -6,7 +6,8 @@ import ActionTypes from './action_types'
 import { SERVER_STATUS } from '../../../constants'
 
 // eslint-disable-next-line no-console
-const logger = (...message) => console.log('IoT reducer', ...message)
+// eslint-disable-next-line max-len
+const logger = () => null // (...message) => console.log('IoT reducer', ...message)
 
 export const INITIAL_STATE = {
   // eslint-disable-next-line max-len

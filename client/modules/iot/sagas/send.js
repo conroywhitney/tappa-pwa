@@ -5,8 +5,9 @@ import ActionTypes from '../reducer/action_types'
 
 import IoT from '../../../aws/iot'
 
-  // eslint-disable-next-line no-console
-const logger = (...message) => console.log('iotSend saga', ...message)
+// eslint-disable-next-line no-console
+// eslint-disable-next-line max-len
+const logger = () => null // (...message) => console.log('iotSend saga', ...message)
 
 const sendRemoteAction = (topic, remoteAction) =>
   IoT.send(JSON.stringify(remoteAction))

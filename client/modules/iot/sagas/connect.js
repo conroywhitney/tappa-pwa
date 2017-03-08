@@ -7,7 +7,8 @@ import IoTActions from '../reducer/action_creators'
 import IoT from '../../../aws/iot'
 
 // eslint-disable-next-line no-console
-const logger = (...message) => console.log('IoT connect saga', ...message)
+// eslint-disable-next-line max-len
+const logger = () => null // (...message) => console.log('IoT connect saga', ...message)
 
 const iotKeysUrl = path(['iot', 'keysUrl'])
 

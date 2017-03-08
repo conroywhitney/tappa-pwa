@@ -4,8 +4,9 @@ import { put, select } from 'redux-saga/effects'
 import ActionTypes from '../reducer/action_types'
 import { GameActions, GameActionTypes } from '../../game'
 
-  // eslint-disable-next-line no-console
-const logger = (...message) => console.log('iotReceived saga', ...message)
+// eslint-disable-next-line no-console
+// eslint-disable-next-line max-len
+const logger = () => null // (...message) => console.log('iotReceived saga', ...message)
 
 const lookupPlayerId = path(['game', 'playerId'])
 
