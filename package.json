@@ -5,7 +5,7 @@
   "dependencies": {
     "@zeal/react-scripts": "^0.1.13",
     "apollo-client": "^0.6.0",
-    "aws-iot-device-sdk": "^1.0.14",
+    "aws-iot-device-sdk": "https://github.com/conroywhitney/aws-iot-device-sdk-js#bugfix/isUndefined_undefined",
     "babel-eslint": "^7.1.1",
     "babel-polyfill": "^6.20.0",
     "classnames": "^2.2.5",

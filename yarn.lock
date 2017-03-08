@@ -379,9 +379,9 @@ autoprefixer@6.5.1, autoprefixer@^6.3.1:
     postcss "^5.2.4"
     postcss-value-parser "^3.2.3"
 
-aws-iot-device-sdk@^1.0.14:
+"aws-iot-device-sdk@https://github.com/conroywhitney/aws-iot-device-sdk-js#bugfix/isUndefined_undefined":
   version "1.0.14"
-  resolved "https://registry.yarnpkg.com/aws-iot-device-sdk/-/aws-iot-device-sdk-1.0.14.tgz#87987dcc344ea6f4d88f4e15467cc6fefc7f2b77"
+  resolved "https://github.com/conroywhitney/aws-iot-device-sdk-js#5dd0988a6d0fb6711b2d0e64453ded6768a3a7f5"
   dependencies:
     crypto-js "3.1.6"
     minimist "1.2.0"
