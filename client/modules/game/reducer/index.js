@@ -6,19 +6,23 @@ import {
   equals,
   flip,
   merge,
+  prop,
   propEq,
   times,
   update
 } from 'ramda'
 import { createReducer } from 'zeal-redux-utils'
+import uuidV4 from 'uuid/v4'
 
 import ActionTypes from './action_types'
-import { COUNTDOWN, PLAYERS, QTY, STATUS } from '../../../constants'
+import { COUNTDOWN, MODES, PLAYERS, QTY, STATUS } from '../../../constants'
 
 export const INITIAL_STATE = {
+  playerId: uuidV4(),
   board: times(always(PLAYERS.blank), QTY),
   countdown: 30,
   lives: 3,
+  mode: MODES.multiplayer,
   opponent: null,
   status: STATUS.inProgress
 }
@@ -28,12 +32,9 @@ const reverseMerge = flip(merge)
 const playerWon = all(equals(PLAYERS.me))
 const playerLost = all(equals(PLAYERS.opponent))
 
-// eslint-disable-next-line complexity
-const newStatus = ({ board, countdown, lives, _status }) => {
+const newStatus = ({ board }) => {
   if (board && playerWon(board)) return STATUS.won
   if (board && playerLost(board)) return STATUS.lost
-  if (countdown <= 0) return STATUS.lost
-  if (lives <= 0) return STATUS.lost
 
   return STATUS.inProgress
 }
@@ -71,7 +72,9 @@ const playOpponent = (gameState: Object, { payload: { index } }) =>
 
 const reset = (_gameState: Object) => INITIAL_STATE
 
-const tap = (gameState: Object, { payload: { index } }) =>
+const myPlayerId = prop('playerId')
+
+const singlePlayerTap = (gameState: Object, { index }) =>
   updateGameState(
     playPlayer(gameState, { payload: { index } }),
     {
@@ -79,36 +82,23 @@ const tap = (gameState: Object, { payload: { index } }) =>
     }
   )
 
+const multiplayerOpponent = (gameState: Object, { index }) =>
+  playOpponent(gameState, { payload: { index } })
+
+const tap = (gameState: Object, { payload: { index, playerId } }) =>
+  (playerId === myPlayerId(gameState))
+    ? singlePlayerTap(gameState, { index })
+    : multiplayerOpponent(gameState, { index })
+
 const tick = (gameState: Object, _payload: Object) =>
   updateGameState(gameState, {
     countdown: newCountdown({ countdown: gameState.countdown })
   })
 
-const multiplayerConnect = (gameState: Object) => gameState
-
-const remoteAction = (gameState, action, payload) => {
-  // eslint-disable-next-line no-console
-  console.log(
-    'MultiplayerRedux',
-    'remoteAction',
-    'action',
-    action,
-    'payload',
-    payload
-  )
-
-  return gameState
-}
-
-const sendRemoteTap = (gameState: Object, { payload: { index } }) =>
-  remoteAction(gameState, ActionTypes.TAP, { index })
-
 export default createReducer(INITIAL_STATE, {
-  [ActionTypes.MULTIPLAYER_CONNECT]: multiplayerConnect,
   [ActionTypes.PLAY_OPPONENT]: playOpponent,
   [ActionTypes.PLAY_PLAYER]: playPlayer,
   [ActionTypes.RESET]: reset,
-  [ActionTypes.SEND_REMOTE_TAP]: sendRemoteTap,
   [ActionTypes.TAP]: tap,
   [ActionTypes.TICK]: tick
 })

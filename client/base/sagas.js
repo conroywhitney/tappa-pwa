@@ -1,9 +1,17 @@
-import { takeEvery } from 'redux-saga/effects'
+import { partial } from 'ramda'
+import { takeEvery, takeLatest } from 'redux-saga/effects'
 
+import { IoTSagas } from '../modules/iot'
 import { GameSagas } from '../modules/game'
 
-export default function* root() {
+export default function* root(dispatch) {
   yield [
-    takeEvery(GameSagas.tap.action, GameSagas.tap.handler)
+    takeEvery(GameSagas.tap.action, GameSagas.tap.handler),
+    takeLatest(
+      IoTSagas.iotConnect.action,
+      partial(IoTSagas.iotConnect.handler, [dispatch])
+    ),
+    takeEvery(IoTSagas.iotReceived.action, IoTSagas.iotReceived.handler),
+    takeEvery(IoTSagas.iotSend.action, IoTSagas.iotSend.handler)
   ]
 }

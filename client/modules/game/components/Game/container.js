@@ -5,11 +5,16 @@ import { connect } from 'react-redux'
 
 import Game from './index'
 import { GameActions } from '../../'
-import { MODES } from '../../../../constants'
 
 const mapStateToProps = state => ({
-  ...pick(['board', 'countdown', 'lives', 'status'], state.game),
-  mode: MODES.multiplayer
+  ...pick([
+    'board',
+    'countdown',
+    'lives',
+    'mode',
+    'playerId',
+    'status'
+  ], state.game)
 })
 
 const mapDispatchToProps = dispatch => ({

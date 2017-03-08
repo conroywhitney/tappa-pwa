@@ -1,11 +1,7 @@
 import ActionTypes from './action_types'
 
-const multiplayerConnect = () => (
-  { type: ActionTypes.MULTIPLAYER_CONNECT }
-)
-
-const tap = index => (
-  { type: ActionTypes.TAP, payload: { index } }
+const tap = ({ index, playerId }) => (
+  { type: ActionTypes.TAP, payload: { index, playerId } }
 )
 
 const tick = () => (
@@ -24,16 +20,10 @@ const reset = () => (
   { type: ActionTypes.RESET }
 )
 
-const sendRemoteTap = index => (
-  { type: ActionTypes.SEND_REMOTE_TAP, payload: { index } }
-)
-
 export default {
-  multiplayerConnect,
   tap,
   tick,
   playPlayer,
   playOpponent,
-  reset,
-  sendRemoteTap
+  reset
 }
