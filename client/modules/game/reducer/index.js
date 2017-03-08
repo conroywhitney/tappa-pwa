@@ -32,12 +32,9 @@ const reverseMerge = flip(merge)
 const playerWon = all(equals(PLAYERS.me))
 const playerLost = all(equals(PLAYERS.opponent))
 
-// eslint-disable-next-line complexity
-const newStatus = ({ board, countdown, lives, _status }) => {
+const newStatus = ({ board }) => {
   if (board && playerWon(board)) return STATUS.won
   if (board && playerLost(board)) return STATUS.lost
-  if (countdown <= 0) return STATUS.lost
-  if (lives <= 0) return STATUS.lost
 
   return STATUS.inProgress
 }
