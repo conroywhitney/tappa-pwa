@@ -1,7 +1,7 @@
 import ActionTypes from './action_types'
 
-const tap = index => (
-  { type: ActionTypes.TAP, payload: { index } }
+const tap = ({ index, playerId }) => (
+  { type: ActionTypes.TAP, payload: { index, playerId } }
 )
 
 const tick = () => (

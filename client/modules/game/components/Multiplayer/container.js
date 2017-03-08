@@ -12,15 +12,18 @@ const mapStateToProps = state => ({
   connected: state.iot.status === SERVER_STATUS.connected
 })
 
-const mapDispatchToProps = dispatch => ({
-  multiplayerConnect: () => dispatch(IoTActions.iotConnect()),
-  startGame: () => dispatch(IoTActions.iotSend(GameActions.tap(123))),
-  handleTap: index => {
-    const tapAction = GameActions.tap(index)
+function mapDispatchToProps(dispatch, ownProps) {
+  const { playerId } = ownProps
 
-    dispatch(tapAction)
-    dispatch(IoTActions.iotSend(tapAction))
+  return {
+    multiplayerConnect: () => dispatch(IoTActions.iotConnect()),
+    handleTap: index => {
+      const tapAction = GameActions.tap({ index, playerId })
+
+      dispatch(tapAction)
+      dispatch(IoTActions.iotSend(tapAction))
+    }
   }
-})
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Multiplayer)

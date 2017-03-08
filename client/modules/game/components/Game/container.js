@@ -8,7 +8,7 @@ import { GameActions } from '../../'
 import { MODES } from '../../../../constants'
 
 const mapStateToProps = state => ({
-  ...pick(['board', 'countdown', 'lives', 'status'], state.game),
+  ...pick(['board', 'countdown', 'lives', 'playerId', 'status'], state.game),
   mode: MODES.multiplayer
 })
 

@@ -7,8 +7,12 @@ import { GameActions } from '../../'
 
 const mapStateToProps = null
 
-const mapDispatchToProps = dispatch => ({
-  handleTap: index => dispatch(GameActions.tap(index))
-})
+function mapDispatchToProps(dispatch, ownProps) {
+  const { playerId } = ownProps
+
+  return {
+    handleTap: index => dispatch(GameActions.tap({ index, playerId }))
+  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(SinglePlayer)

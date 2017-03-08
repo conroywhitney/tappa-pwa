@@ -6,16 +6,19 @@ import {
   equals,
   flip,
   merge,
+  prop,
   propEq,
   times,
   update
 } from 'ramda'
 import { createReducer } from 'zeal-redux-utils'
+import uuidV4 from 'uuid/v4'
 
 import ActionTypes from './action_types'
 import { COUNTDOWN, PLAYERS, QTY, STATUS } from '../../../constants'
 
 export const INITIAL_STATE = {
+  playerId: uuidV4(),
   board: times(always(PLAYERS.blank), QTY),
   countdown: 30,
   lives: 3,
@@ -71,13 +74,23 @@ const playOpponent = (gameState: Object, { payload: { index } }) =>
 
 const reset = (_gameState: Object) => INITIAL_STATE
 
-const tap = (gameState: Object, { payload: { index } }) =>
+const myPlayerId = prop('playerId')
+
+const singlePlayerTap = (gameState: Object, { index }) =>
   updateGameState(
     playPlayer(gameState, { payload: { index } }),
     {
       lives: newLives({ index, board: gameState.board, lives: gameState.lives })
     }
   )
+
+const multiplayerOpponent = (gameState: Object, { index }) =>
+  playOpponent(gameState, { payload: { index } })
+
+const tap = (gameState: Object, { payload: { index, playerId } }) =>
+  (playerId === myPlayerId(gameState))
+    ? singlePlayerTap(gameState, { index })
+    : multiplayerOpponent(gameState, { index })
 
 const tick = (gameState: Object, _payload: Object) =>
   updateGameState(gameState, {
