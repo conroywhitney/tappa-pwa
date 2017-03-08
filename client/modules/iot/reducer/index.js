@@ -14,25 +14,11 @@ export const INITIAL_STATE = {
   status: SERVER_STATUS.disconnected
 }
 
-const iotClosed = (iotState: Object) => {
-  logger('iotClosed')
+const iotConnect = evolve({ status: always(SERVER_STATUS.connecting) })
 
-  return evolve({
-    iot: {
-      status: always(SERVER_STATUS.disconnected)
-    }
-  })(iotState)
-}
+const iotClosed = evolve({ status: always(SERVER_STATUS.disconnected) })
 
-const iotConnected = (iotState: Object) => {
-  logger('iotConnected')
-
-  return evolve({
-    iot: {
-      status: always(SERVER_STATUS.connected)
-    }
-  })(iotState)
-}
+const iotConnected = evolve({ status: always(SERVER_STATUS.connected) })
 
 const iotReceived = (iotState: Object, action: Object) => {
   const { payload } = action
@@ -41,16 +27,6 @@ const iotReceived = (iotState: Object, action: Object) => {
   logger('iotReceived', 'message', JSON.parse(message.toString()))
 
   return iotState
-}
-
-const iotConnect = (iotState: Object) => {
-  logger('iotConnect')
-
-  return evolve({
-    iot: {
-      status: always(SERVER_STATUS.connecting)
-    }
-  })(iotState)
 }
 
 const iotSend = (iotState: Object, payload: Object) => {
