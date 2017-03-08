@@ -22,9 +22,8 @@ const iotConnected = evolve({ status: always(SERVER_STATUS.connected) })
 
 const iotReceived = (iotState: Object, action: Object) => {
   const { payload } = action
-  const { message } = payload
 
-  logger('iotReceived', 'message', JSON.parse(message.toString()))
+  logger('iotReceived', 'message', JSON.parse(payload.toString()))
 
   return iotState
 }

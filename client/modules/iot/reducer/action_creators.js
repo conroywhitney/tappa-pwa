@@ -12,8 +12,8 @@ const iotConnected = () => (
   { type: ActionTypes.IOT_CONNECTED }
 )
 
-const iotReceived = message => (
-  { type: ActionTypes.IOT_RECEIVED, payload: { message } }
+const iotReceived = payload => (
+  { type: ActionTypes.IOT_RECEIVED, payload }
 )
 
 const iotSend = payload => (
