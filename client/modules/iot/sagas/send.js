@@ -1,3 +1,4 @@
+import { partial } from 'ramda'
 import { call } from 'redux-saga/effects'
 
 import ActionTypes from '../reducer/action_types'
@@ -7,19 +8,19 @@ import IoT from '../../../aws/iot'
   // eslint-disable-next-line no-console
 const logger = (...message) => console.log('iotSend saga', ...message)
 
+const sendRemoteAction = (topic, remoteAction) =>
+  IoT.send(JSON.stringify(remoteAction))
+
 export function* iotSend(action) {
-  const { payload } = action
-  const { index } = payload
+  const { payload: remoteAction } = action
   const topic = 'games/1234'
 
   logger(
     'topic', topic,
-    'action', action,
-    'payload', payload,
-    'index', index
+    'remoteAction', remoteAction
   )
 
-  yield call(() => IoT.send('Hello, World!'))
+  yield call(partial(sendRemoteAction, [topic, remoteAction]))
 }
 
 export default {

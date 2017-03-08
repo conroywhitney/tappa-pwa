@@ -38,7 +38,7 @@ const iotReceived = (iotState: Object, action: Object) => {
   const { payload } = action
   const { message } = payload
 
-  logger('iotReceived', 'message', message.toString())
+  logger('iotReceived', 'message', JSON.parse(message.toString()))
 
   return iotState
 }
