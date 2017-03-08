@@ -19,14 +19,13 @@ export default class Multiplayer extends Component {
       connected,
       status,
       handleTap,
-      resetGame,
-      startGame
+      resetGame
     } = this.props
 
     return (
       <div>
         <GameOverAlert status={status} onPress={resetGame} />
-        <WaitingAlert connected={connected} startGame={startGame} />
+        <WaitingAlert connected={connected} />
         <Board board={board} onClick={handleTap} />
       </div>
     )
