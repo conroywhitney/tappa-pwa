@@ -1,10 +1,13 @@
-import { put } from 'redux-saga/effects'
+import { path } from 'ramda'
+import { put, select } from 'redux-saga/effects'
 
 import ActionTypes from '../reducer/action_types'
 import { GameActions, GameActionTypes } from '../../game'
 
   // eslint-disable-next-line no-console
 const logger = (...message) => console.log('iotReceived saga', ...message)
+
+const lookupPlayerId = path(['game', 'playerId'])
 
 export function* iotReceived(action) {
   const { payload } = action
@@ -13,9 +16,12 @@ export function* iotReceived(action) {
   logger('parsedAction', parsedAction)
 
   if (parsedAction.type === GameActionTypes.TAP) {
-    const { index } = parsedAction.payload
+    const { index, playerId } = parsedAction.payload
+    const myPlayerId = yield select(lookupPlayerId)
 
-    yield put(GameActions.playOpponent(index))
+    if (playerId !== myPlayerId) {
+      yield put(GameActions.playOpponent(index))
+    }
   }
 }
 
