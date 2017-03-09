@@ -5,6 +5,7 @@ export default createActionTypes(
   [
     'PLAY_OPPONENT',
     'PLAY_PLAYER',
+    'PLAY_REMOTE',
     'RESET',
     'TAP',
     'TICK'

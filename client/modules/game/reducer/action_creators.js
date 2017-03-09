@@ -8,12 +8,16 @@ const tick = () => (
   { type: ActionTypes.TICK }
 )
 
+const playOpponent = index => (
+  { type: ActionTypes.PLAY_OPPONENT, payload: { index } }
+)
+
 const playPlayer = index => (
   { type: ActionTypes.PLAY_PLAYER, payload: { index } }
 )
 
-const playOpponent = index => (
-  { type: ActionTypes.PLAY_OPPONENT, payload: { index } }
+const playRemote = ({ gameId, index, playerId }) => (
+  { type: ActionTypes.PLAY_REMOTE, payload: { gameId, index, playerId } }
 )
 
 const reset = () => (
@@ -23,7 +27,8 @@ const reset = () => (
 export default {
   tap,
   tick,
-  playPlayer,
   playOpponent,
+  playPlayer,
+  playRemote,
   reset
 }

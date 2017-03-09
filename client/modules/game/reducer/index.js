@@ -11,11 +11,13 @@ import {
   update
 } from 'ramda'
 import { createReducer } from 'zeal-redux-utils'
+import uuidV4 from 'uuid/v4'
 
 import ActionTypes from './action_types'
 import { COUNTDOWN, PLAYERS, QTY, STATUS } from '../../../constants'
 
 export const INITIAL_STATE = {
+  gameId: uuidV4(),
   board: times(always(PLAYERS.blank), QTY),
   opponent: null,
   status: STATUS.inProgress
@@ -61,7 +63,10 @@ const playPlayer = (gameState: Object, { payload: { index } }) =>
 const playOpponent = (gameState: Object, { payload: { index } }) =>
   updateBoard(gameState, index, PLAYERS.opponent)
 
-const reset = (_gameState: Object) => INITIAL_STATE
+const reset = (_gameState: Object) => ({
+  ...INITIAL_STATE,
+  gameId: uuidV4()
+})
 
 const tick = (gameState: Object, _payload: Object) =>
   updateGameState(gameState, {

@@ -14,8 +14,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   switchMode: mode => {
-    dispatch(GameActions.reset())
     dispatch(AppActions.switchMode(mode))
+    dispatch(GameActions.reset())
   }
 })
 

@@ -8,16 +8,21 @@ import GameActions from '../reducer/action_creators'
 import { DIFFICULTY, MODES } from '../../../constants'
 import { getRandomInt } from '../../../utils'
 
+const lookupGameId = path(['game', 'gameId'])
 const lookupGameMode = path(['app', 'mode'])
 
 export function* tap({ payload: { index } }) {
   const opponentSpeed = getRandomInt(DIFFICULTY.min, DIFFICULTY.max)
   const gameMode = yield select(lookupGameMode)
-
-  yield call(delay, opponentSpeed)
+  const originalGameId = yield select(lookupGameId)
 
   if (gameMode === MODES.singlePlayer) {
-    yield put(GameActions.playOpponent(index))
+    yield call(delay, opponentSpeed)
+    const currentGameId = yield select(lookupGameId)
+
+    if (currentGameId === originalGameId) {
+      yield put(GameActions.playOpponent(index))
+    }
   }
 }
 
