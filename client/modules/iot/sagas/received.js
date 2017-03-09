@@ -29,7 +29,7 @@ export function* iotReceived(action) {
       'myPlayerId', myPlayerId
     )
 
-    if (playerId !== myPlayerId) return
+    if (playerId === myPlayerId) return
 
     yield put(GameActions.playOpponent(index))
   }
