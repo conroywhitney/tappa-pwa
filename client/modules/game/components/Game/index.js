@@ -8,6 +8,8 @@ import Multiplayer from '../Multiplayer/container'
 
 import { MODES } from '../../../../constants'
 
+import styles from './styles.scss'
+
 export default function Game(props) {
   const { mode } = props
   const singlePlayerProps = pick([
@@ -18,7 +20,7 @@ export default function Game(props) {
   ])
 
   return (
-    <div>
+    <div className={styles.container}>
       {mode === MODES.singlePlayer &&
         <SinglePlayer {...singlePlayerProps(props)} />}
 
