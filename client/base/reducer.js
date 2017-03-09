@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux'
 
-import { reducer as appReducer } from '../modules/app'
+import { AppReducer } from '../modules/app'
 import { IoTReducer } from '../modules/iot'
 import { GameReducer } from '../modules/game'
 import apolloClient from './apolloClient'
 
 export default combineReducers({
-  app: appReducer,
+  app: AppReducer,
   iot: IoTReducer,
   game: GameReducer,
   apollo: apolloClient.reducer()

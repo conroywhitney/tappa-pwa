@@ -1,10 +1,18 @@
 import { createReducer } from 'zeal-redux-utils'
+import uuidV4 from 'uuid/v4'
 
-const initialState = {}
+import ActionTypes from './action_types'
+import { MODES } from '../../../constants'
 
-const handlers = {
-  // Pattern:
-  // [ActionTypes.ACTION_NAME]: actionFunction
+export const INITIAL_STATE = {
+  playerId: uuidV4(),
+  mode: MODES.singlePlayer
 }
 
-export default createReducer(initialState, handlers)
+const switchMode = (appState: Object, { payload: { mode } }) => (
+  { ...appState, mode }
+)
+
+export default createReducer(INITIAL_STATE, {
+  [ActionTypes.SWITCH_MODE]: switchMode
+})

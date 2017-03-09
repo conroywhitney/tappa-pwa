@@ -7,14 +7,8 @@ import Game from './index'
 import { GameActions } from '../../'
 
 const mapStateToProps = state => ({
-  ...pick([
-    'board',
-    'countdown',
-    'lives',
-    'mode',
-    'playerId',
-    'status'
-  ], state.game)
+  ...pick(['mode', 'playerId'], state.app),
+  ...pick(['board', 'status'], state.game)
 })
 
 const mapDispatchToProps = dispatch => ({

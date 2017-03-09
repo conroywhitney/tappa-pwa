@@ -4,6 +4,21 @@
 .header {
   background-color: $header-background-color;
   color: $header-color;
-  height: 8 * $unit;
+  display: flex;
+  height: 10 * $unit;
   padding: 2 * $unit;
+}
+
+.menu,
+.placeholder,
+.title {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+
+.menu {
+  color: $header-menu-color;
+  justify-content: flex-start;
 }

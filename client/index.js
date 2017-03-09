@@ -8,7 +8,7 @@ import { ThemeProvider } from 'react-css-themr'
 import './styles/commons.scss'
 import theme from './styles/theme'
 
-import App from './modules/app/components/App'
+import App from './modules/app/components/App/container'
 import { apolloClient, configureStore } from './base'
 
 const rootEl = document.getElementById('root')

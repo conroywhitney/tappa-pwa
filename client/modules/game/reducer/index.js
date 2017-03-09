@@ -6,7 +6,6 @@ import {
   equals,
   flip,
   merge,
-  prop,
   propEq,
   times,
   update
@@ -15,14 +14,11 @@ import { createReducer } from 'zeal-redux-utils'
 import uuidV4 from 'uuid/v4'
 
 import ActionTypes from './action_types'
-import { COUNTDOWN, MODES, PLAYERS, QTY, STATUS } from '../../../constants'
+import { COUNTDOWN, PLAYERS, QTY, STATUS } from '../../../constants'
 
 export const INITIAL_STATE = {
-  playerId: uuidV4(),
+  gameId: uuidV4(),
   board: times(always(PLAYERS.blank), QTY),
-  countdown: 30,
-  lives: 3,
-  mode: MODES.multiplayer,
   opponent: null,
   status: STATUS.inProgress
 }
@@ -44,9 +40,6 @@ const newBoard = ({ index, player, board }) =>
 
 const newCountdown = ({ countdown }) =>
   clamp(COUNTDOWN.min, COUNTDOWN.max, countdown - 1)
-
-const newLives = ({ index, board, lives }) =>
-  board[index] === PLAYERS.me ? lives - 1 : lives
 
 const stillPlaying = propEq('status', STATUS.inProgress)
 
@@ -70,25 +63,10 @@ const playPlayer = (gameState: Object, { payload: { index } }) =>
 const playOpponent = (gameState: Object, { payload: { index } }) =>
   updateBoard(gameState, index, PLAYERS.opponent)
 
-const reset = (_gameState: Object) => INITIAL_STATE
-
-const myPlayerId = prop('playerId')
-
-const singlePlayerTap = (gameState: Object, { index }) =>
-  updateGameState(
-    playPlayer(gameState, { payload: { index } }),
-    {
-      lives: newLives({ index, board: gameState.board, lives: gameState.lives })
-    }
-  )
-
-const multiplayerOpponent = (gameState: Object, { index }) =>
-  playOpponent(gameState, { payload: { index } })
-
-const tap = (gameState: Object, { payload: { index, playerId } }) =>
-  (playerId === myPlayerId(gameState))
-    ? singlePlayerTap(gameState, { index })
-    : multiplayerOpponent(gameState, { index })
+const reset = (_gameState: Object) => ({
+  ...INITIAL_STATE,
+  gameId: uuidV4()
+})
 
 const tick = (gameState: Object, _payload: Object) =>
   updateGameState(gameState, {
@@ -99,6 +77,5 @@ export default createReducer(INITIAL_STATE, {
   [ActionTypes.PLAY_OPPONENT]: playOpponent,
   [ActionTypes.PLAY_PLAYER]: playPlayer,
   [ActionTypes.RESET]: reset,
-  [ActionTypes.TAP]: tap,
   [ActionTypes.TICK]: tick
 })

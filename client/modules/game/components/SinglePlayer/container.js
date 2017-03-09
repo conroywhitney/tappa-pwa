@@ -7,11 +7,9 @@ import { GameActions } from '../../'
 
 const mapStateToProps = null
 
-function mapDispatchToProps(dispatch, ownProps) {
-  const { playerId } = ownProps
-
+function mapDispatchToProps(dispatch) {
   return {
-    handleTap: index => dispatch(GameActions.tap({ index, playerId }))
+    handleTap: index => dispatch(GameActions.playPlayer(index))
   }
 }
 

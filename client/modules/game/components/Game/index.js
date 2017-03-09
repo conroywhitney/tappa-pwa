@@ -8,22 +8,35 @@ import Multiplayer from '../Multiplayer/container'
 
 import { MODES } from '../../../../constants'
 
+import styles from './styles.scss'
+
 export default function Game(props) {
   const { mode } = props
+
+  return (
+    <div className={styles.container}>
+      {mode === MODES.singlePlayer && renderSinglePlayer(props)}
+      {mode === MODES.multiplayer && renderMultiplayer(props)}
+    </div>
+  )
+}
+
+function renderSinglePlayer(props) {
   const singlePlayerProps = pick([
     'board', 'playerId', 'status', 'resetGame'
   ])
+
+  return (
+    <SinglePlayer {...singlePlayerProps(props)} />
+  )
+}
+
+function renderMultiplayer(props) {
   const multiplayerProps = pick([
     'board', 'playerId', 'opponent', 'status', 'resetGame'
   ])
 
   return (
-    <div>
-      {mode === MODES.singlePlayer &&
-        <SinglePlayer {...singlePlayerProps(props)} />}
-
-      {mode === MODES.multiplayer &&
-        <Multiplayer {...multiplayerProps(props)} />}
-    </div>
+    <Multiplayer {...multiplayerProps(props)} />
   )
 }

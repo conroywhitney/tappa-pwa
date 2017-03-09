@@ -1,0 +1,19 @@
+@import '~styles/globals';
+
+.iconMenu {
+  font-size: 1rem;
+
+  .icon {
+    color: #fff !important; // sass-lint:disable-line no-important
+  }
+}
+
+.menuItem {
+  .icon {
+    color: #000 !important; // sass-lint:disable-line no-important
+  }
+
+  &.selected {
+    background-color: $menu-item-selected-background !important; // sass-lint:disable-line no-important
+  }
+}
