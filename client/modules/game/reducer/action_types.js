@@ -6,6 +6,7 @@ export default createActionTypes(
     'PLAY_OPPONENT',
     'PLAY_PLAYER',
     'RESET',
+    'SWITCH_MODE',
     'TAP',
     'TICK'
   ]

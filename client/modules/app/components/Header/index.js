@@ -1,7 +1,7 @@
 import React from 'react'
 import { themr } from 'react-css-themr'
 
-import Menu from '../Menu'
+import Menu from '../Menu/container'
 
 import headerTheme from './theme.scss'
 

@@ -20,10 +20,15 @@ const reset = () => (
   { type: ActionTypes.RESET }
 )
 
+const switchMode = mode => (
+  { type: ActionTypes.SWITCH_MODE, payload: { mode } }
+)
+
 export default {
   tap,
   tick,
   playPlayer,
   playOpponent,
-  reset
+  reset,
+  switchMode
 }

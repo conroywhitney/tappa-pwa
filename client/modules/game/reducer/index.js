@@ -95,10 +95,14 @@ const tick = (gameState: Object, _payload: Object) =>
     countdown: newCountdown({ countdown: gameState.countdown })
   })
 
+const switchMode = (gameState: Object, { payload: { mode } }) =>
+  updateGameState(reset(gameState), { mode })
+
 export default createReducer(INITIAL_STATE, {
   [ActionTypes.PLAY_OPPONENT]: playOpponent,
   [ActionTypes.PLAY_PLAYER]: playPlayer,
   [ActionTypes.RESET]: reset,
+  [ActionTypes.SWITCH_MODE]: switchMode,
   [ActionTypes.TAP]: tap,
   [ActionTypes.TICK]: tick
 })
