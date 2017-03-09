@@ -6,6 +6,7 @@ import { Game } from '../../../game'
 import Header from '../Header'
 
 import appTheme from './theme.scss'
+import 'react-toolbox/lib/commons.scss'
 
 export function App({ theme }) {
   return (

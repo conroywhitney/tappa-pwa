@@ -1,0 +1,9 @@
+@import '~styles/globals';
+
+.iconMenu {
+  font-size: 1rem;
+
+  .icon {
+    color: #fff !important; // sass-lint:disable-line no-important
+  }
+}

@@ -4,6 +4,18 @@
 .header {
   background-color: $header-background-color;
   color: $header-color;
-  height: 8 * $unit;
+  display: flex;
+  height: 10 * $unit;
   padding: 2 * $unit;
+}
+
+.menu,
+.placeholder,
+.title {
+  flex: 1;
+}
+
+.menu {
+  color: $header-menu-color;
+  text-align: left;
 }
