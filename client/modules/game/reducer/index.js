@@ -6,23 +6,17 @@ import {
   equals,
   flip,
   merge,
-  prop,
   propEq,
   times,
   update
 } from 'ramda'
 import { createReducer } from 'zeal-redux-utils'
-import uuidV4 from 'uuid/v4'
 
 import ActionTypes from './action_types'
-import { COUNTDOWN, MODES, PLAYERS, QTY, STATUS } from '../../../constants'
+import { COUNTDOWN, PLAYERS, QTY, STATUS } from '../../../constants'
 
 export const INITIAL_STATE = {
-  playerId: uuidV4(),
   board: times(always(PLAYERS.blank), QTY),
-  countdown: 30,
-  lives: 3,
-  mode: MODES.multiplayer,
   opponent: null,
   status: STATUS.inProgress
 }
@@ -44,9 +38,6 @@ const newBoard = ({ index, player, board }) =>
 
 const newCountdown = ({ countdown }) =>
   clamp(COUNTDOWN.min, COUNTDOWN.max, countdown - 1)
-
-const newLives = ({ index, board, lives }) =>
-  board[index] === PLAYERS.me ? lives - 1 : lives
 
 const stillPlaying = propEq('status', STATUS.inProgress)
 
@@ -72,37 +63,14 @@ const playOpponent = (gameState: Object, { payload: { index } }) =>
 
 const reset = (_gameState: Object) => INITIAL_STATE
 
-const myPlayerId = prop('playerId')
-
-const singlePlayerTap = (gameState: Object, { index }) =>
-  updateGameState(
-    playPlayer(gameState, { payload: { index } }),
-    {
-      lives: newLives({ index, board: gameState.board, lives: gameState.lives })
-    }
-  )
-
-const multiplayerOpponent = (gameState: Object, { index }) =>
-  playOpponent(gameState, { payload: { index } })
-
-const tap = (gameState: Object, { payload: { index, playerId } }) =>
-  (playerId === myPlayerId(gameState))
-    ? singlePlayerTap(gameState, { index })
-    : multiplayerOpponent(gameState, { index })
-
 const tick = (gameState: Object, _payload: Object) =>
   updateGameState(gameState, {
     countdown: newCountdown({ countdown: gameState.countdown })
   })
 
-const switchMode = (gameState: Object, { payload: { mode } }) =>
-  updateGameState(reset(gameState), { mode })
-
 export default createReducer(INITIAL_STATE, {
   [ActionTypes.PLAY_OPPONENT]: playOpponent,
   [ActionTypes.PLAY_PLAYER]: playPlayer,
   [ActionTypes.RESET]: reset,
-  [ActionTypes.SWITCH_MODE]: switchMode,
-  [ActionTypes.TAP]: tap,
   [ActionTypes.TICK]: tick
 })

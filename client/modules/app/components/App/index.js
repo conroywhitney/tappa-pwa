@@ -8,10 +8,10 @@ import Header from '../Header'
 import appTheme from './theme.scss'
 import 'react-toolbox/lib/commons.scss'
 
-export function App({ theme }) {
+export function App({ mode, theme, switchMode }) {
   return (
     <div className={theme.app}>
-      <Header />
+      <Header mode={mode} switchMode={switchMode} />
 
       <Switch>
         <Route exact path='/' component={Game} />

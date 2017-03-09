@@ -1,7 +1,7 @@
 import { createActionTypes } from 'zeal-redux-utils'
 
 export default createActionTypes(
-  'tappa',
+  'tappa/iot',
   [
     'IOT_CONNECT',
     'IOT_CLOSED',

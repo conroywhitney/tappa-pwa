@@ -1,12 +1,8 @@
 import { createActionTypes } from 'zeal-redux-utils'
 
 export default createActionTypes(
-  'tappa/game',
+  'tappa/app',
   [
-    'PLAY_OPPONENT',
-    'PLAY_PLAYER',
-    'RESET',
-    'TAP',
-    'TICK'
+    'SWITCH_MODE'
   ]
 )
