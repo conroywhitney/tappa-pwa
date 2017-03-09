@@ -17,6 +17,7 @@ function mapDispatchToProps(dispatch, ownProps) {
 
   return {
     multiplayerConnect: () => dispatch(IoTActions.iotConnect()),
+    multiplayerDisconnect: () => dispatch(IoTActions.iotDisconnect()),
     handleTap: index => {
       const tapAction = GameActions.tap({ index, playerId })
 

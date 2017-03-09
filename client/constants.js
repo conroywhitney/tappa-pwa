@@ -46,5 +46,6 @@ export const TILE_SIZE = CELL_SIZE - CELL_PADDING * 2
 export const SERVER_STATUS = {
   connected: 'connected',
   connecting: 'connecting',
-  disconnected: 'disconnected'
+  disconnected: 'disconnected',
+  disconnecting: 'disconnecting'
 }

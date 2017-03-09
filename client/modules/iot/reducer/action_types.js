@@ -6,6 +6,7 @@ export default createActionTypes(
     'IOT_CONNECT',
     'IOT_CLOSED',
     'IOT_CONNECTED',
+    'IOT_DISCONNECT',
     'IOT_RECEIVED',
     'IOT_SEND'
   ]

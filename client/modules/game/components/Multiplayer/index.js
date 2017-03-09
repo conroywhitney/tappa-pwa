@@ -13,6 +13,12 @@ export default class Multiplayer extends Component {
     if (!connected) multiplayerConnect()
   }
 
+  componentWillUnmount() {
+    const { multiplayerDisconnect, connected } = this.props
+
+    if (connected) multiplayerDisconnect()
+  }
+
   render() {
     const {
       board,

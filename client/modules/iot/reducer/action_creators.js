@@ -12,6 +12,10 @@ const iotConnected = () => (
   { type: ActionTypes.IOT_CONNECTED }
 )
 
+const iotDisconnect = () => (
+  { type: ActionTypes.IOT_DISCONNECT }
+)
+
 const iotReceived = payload => (
   { type: ActionTypes.IOT_RECEIVED, payload }
 )
@@ -24,6 +28,7 @@ export default {
   iotConnect,
   iotClosed,
   iotConnected,
+  iotDisconnect,
   iotReceived,
   iotSend
 }

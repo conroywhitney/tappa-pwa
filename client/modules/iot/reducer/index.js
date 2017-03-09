@@ -17,6 +17,8 @@ export const INITIAL_STATE = {
 
 const iotConnect = evolve({ status: always(SERVER_STATUS.connecting) })
 
+const iotDisconnect = evolve({ status: always(SERVER_STATUS.disconnecting) })
+
 const iotClosed = evolve({ status: always(SERVER_STATUS.disconnected) })
 
 const iotConnected = evolve({ status: always(SERVER_STATUS.connected) })
@@ -40,8 +42,9 @@ const iotSend = (iotState: Object, payload: Object) => {
 
 export default createReducer(INITIAL_STATE, {
   [ActionTypes.IOT_CLOSED]: iotClosed,
-  [ActionTypes.IOT_CONNECTED]: iotConnected,
-  [ActionTypes.IOT_RECEIVED]: iotReceived,
   [ActionTypes.IOT_CONNECT]: iotConnect,
+  [ActionTypes.IOT_CONNECTED]: iotConnected,
+  [ActionTypes.IOT_DISCONNECT]: iotDisconnect,
+  [ActionTypes.IOT_RECEIVED]: iotReceived,
   [ActionTypes.IOT_SEND]: iotSend
 })

@@ -56,6 +56,14 @@ const IoT = {
     IoT.client.on('close', handleClose)
   },
 
+  disconnect: () => {
+    logger(
+      'disconnect'
+    )
+
+    IoT.client.end()
+  },
+
   send: message => {
     logger(
       'send',
