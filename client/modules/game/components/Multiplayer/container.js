@@ -20,7 +20,7 @@ function mapDispatchToProps(dispatch, ownProps) {
     multiplayerDisconnect: () => dispatch(IoTActions.iotDisconnect()),
     handleTap: index => {
       dispatch(GameActions.playPlayer(index))
-      dispatch(IoTActions.iotSend(GameActions.playOpponent(index, playerId)))
+      dispatch(IoTActions.iotSend(GameActions.playRemote({ index, playerId })))
     }
   }
 }
